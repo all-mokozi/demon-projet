@@ -35,11 +35,13 @@ class demandeRv2 {
     // const d1 = new demandeRv2(1,"2024-06-01","en attente","10:00");
 
     //ou
-    export enum StatutDemandeModel {
-    EN_ATTENTE="en attente",
-    ACCEPTER="acceptée",
-    REFUSER="refusée"
-}
+//     export enum StatutDemandeModel {
+//     EN_ATTENTE="en attente",
+//     ACCEPTER="acceptée",
+//     REFUSER="refusée"
+// }
+
+export type StatutDemandeModel = "en attente" | "acceptée" | "refusée";
    export interface DemandeListRvModel {
         id: number;
         dateDemande: string;
@@ -57,3 +59,4 @@ class demandeRv2 {
         PEDIATRIE="pédiatrie",
         ORTHOPEDIE="orthopédie"
     }
+    

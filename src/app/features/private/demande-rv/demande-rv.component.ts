@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { FormDemandeComponent } from '../../public/form-demande/form-demande.component';
-import { HeaderComponent } from '../../../layouts/private/header/header.component';
 
 @Component({
   selector: 'app-demande-rv',

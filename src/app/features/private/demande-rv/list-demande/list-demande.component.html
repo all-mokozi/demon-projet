@@ -57,9 +57,22 @@
               <td class="align-middle">{{demande.dateDemande}}</td>
               <td class="align-middle">{{demande.heure}}</td>
               <td class="align-middle">
-                <span class="badge bg-warning text-dark">
+                @if(demande.statut === 'acceptée'){
+                  <span class="badge bg-success">
+                    <i class="bi bi-check-circle"></i> {{demande.statut}}
+                  </span>
+                }@else if(demande.statut === 'refusée'){
+                  <span class="badge bg-danger">
+                    <i class="bi bi-x-circle"></i> {{demande.statut}}
+                  </span>
+                }@else{
+                  <span class="badge bg-warning text-dark">
                   <i class="bi bi-clock"></i> {{demande.statut}}
+                
                 </span>
+
+                 }
+                
               </td>
               <td class="align-middle">
                 <button class="btn btn-sm btn-outline-primary me-1">
