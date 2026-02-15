@@ -41,22 +41,48 @@ class demandeRv2 {
 //     REFUSER="refusée"
 // }
 
-export type StatutDemandeModel = "en attente" | "acceptée" | "refusée";
+export type StatutDemandeModel = "En attente" | "Acceptée" | "Refusée";
    export interface DemandeListRvModel {
         id: number;
         dateDemande: string;
         statut: StatutDemandeModel;
         heure: string;  
-        specialite: SpecialiteModel; //? : attribut optionnel 
+        specialite: SpecialiteType; //? : attribut optionnel 
     }
     // const d1:DemandeRv3 = {
     // id:1,datedemande:"2024-06-01",
     // statut:"en attente",
     // heure:"10:00"};
-    export enum SpecialiteModel {
-        CARDIOLOGIE="cardiologie",
-        DERMATOLOGIE="dermatologie",
-        PEDIATRIE="pédiatrie",
-        ORTHOPEDIE="orthopédie"
+        // export enum SpecialiteModel {
+        //     CARDIOLOGIE="cardiologie",
+        //     DERMATOLOGIE="dermatologie",
+        //     PEDIATRIE="pédiatrie",
+        //     ORTHOPEDIE="orthopédie"
+        // }
+
+    export type SpecialiteType = "Cardiologie" | "Dermatologie" | "Pédiatrie" | "Orthopédie";
+    export interface DemandeRVFilterModel {
+        statut?: StatutDemandeModel;//? : attribut optionnel
+        specialite?: SpecialiteType|'';//? : attribut optionnel
+        page?: number;
+        size?: number;
+
     }
-    
+    export interface DemandeListResponseModel {
+        data: DemandeListRvModel[];
+        totalPages: number;
+        currentPage: number;
+        totalItems: number;
+        pages: number[];
+        size?: number;
+    }
+// let filtre:demandeRVFilterModel = {
+//     statut:"en attente",
+//     specialite:SpecialiteModel.CARDIOLOGIE
+// }
+// let filtre2:demandeRVFilterModel = {
+//     statut:"en attente"
+// }
+// let filtre3:demandeRVFilterModel = {
+//     specialite:SpecialiteModel.CARDIOLOGIE
+// }
