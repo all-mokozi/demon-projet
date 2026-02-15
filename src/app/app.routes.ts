@@ -13,59 +13,15 @@ export const routes: Routes = [
     // private route
 {
     path: 'private',
-    component: PrivateComponent,
-    children: [
-         {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full' 
-    },
-         {
-
-        path: 'dashboard',
-        component: DashboardComponent
-    }
-    , {
-
-        path: 'form-demande',
-        component: FormDemandeComponent
-
-    }
-
-    , {
-        path: 'list-demande',
-        component: ListDemandeComponent
-    }
-
-    ,
-    {
-        path: 'rv',
-        component: RvComponent
-
-    }
-    ]
+    loadChildren: () => import('./features/private/routes/private.routes').then(m => m.privateRoutes)
 }
+    
    
     // public route
-        ,{
+        ,    {
             path: 'public',
-            component: PublicComponent,
-            children: [
-                {
-                    path: '',
-                    redirectTo: 'login',
-                    pathMatch: 'full'
-                },
-                {path: 'patient', 
-                    component: PatientComponent
-                },
-                {
-                    path: 'login',
-                    component: LoginComponent
-                },
-            ]
-              
-        }        
+            loadChildren: () => import('./features/public/routes/public.routes').then(m => m.publicRoutes)
+        }  
     
    
     ,{
