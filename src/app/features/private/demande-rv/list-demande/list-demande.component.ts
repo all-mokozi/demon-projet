@@ -3,11 +3,12 @@ import { RouterLink } from '@angular/router';
 import { DemandeListResponseModel, DemandeRVFilterModel} from '../../models/demande.models';
 import { DemandeService } from '../services/demande.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-demande',
   standalone: true,
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink,FormsModule,CommonModule],
   templateUrl: './list-demande.component.html',
   styleUrl: './list-demande.component.css'
 })
