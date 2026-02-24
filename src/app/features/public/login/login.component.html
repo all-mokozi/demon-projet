@@ -24,16 +24,19 @@
             <h5 class="text-center mb-4">Se connecter</h5>
 
             <!-- Form -->
-            <form>
+            <form action="" #loginForm="ngForm" (ngSubmit)="onLogin()">
+              
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Login</label>
-                    <input type="text" class="form-control" placeholder="Email ou nom d'utilisateur">
+                    <label for="username" class="form-label fw-semibold">Login</label>
+                    <input name="email" type="text" class="form-control" id="username" placeholder="Email ou nom d'utilisateur" 
+                    required [(ngModel)]="userLogin.email" >
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Mot de passe</label>
-                    <input type="password" class="form-control" placeholder="Mot de passe">
+                    <label for="password" class="form-label fw-semibold">Mot de passe</label>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Mot de passe"
+                    required [(ngModel)]="userLogin.password" >
                     <div class="text-end mt-1">
                         <a href="#" class="link-primary small">Mot de passe oublié ?</a>
                     </div>
@@ -52,6 +55,7 @@
 
         </div>
     </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   

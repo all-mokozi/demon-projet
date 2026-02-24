@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MOCK_DEMANDES } from '../../../../mocks/demande.mock';
+import { MOCK_DEMANDES } from '@mocks';
 import { DemandeListResponseModel, DemandeListRvModel, DemandeRVFilterModel } from '../../models/demande.models';
 import { environment } from '../../../../../environments/environment.development';
 

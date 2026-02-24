@@ -34,11 +34,19 @@ export class ListDemandeComponent implements OnInit,OnDestroy {
       // this.demandes = MOCK_DEMANDES;
       this.loadDemandes(); 
    }
-    onFilterStatusChange(): void {
+  
+    onFilterStatutAndSpecialityChange(): void {
       this.loadDemandes();
     }
-    onFilterSpecialityChange(): void {
+    onPaginate(page: number): void {
+      this.filter.page = page;
       this.loadDemandes();
+    }
+    activePrecedent(): boolean {
+      return (this.demandesResponse?.currentPage || 1) > 1;
+    }
+    activeSuivant(): boolean {
+      return (this.demandesResponse?.currentPage || 1) < (this.demandesResponse?.totalPages || 1);
     }
  
 }

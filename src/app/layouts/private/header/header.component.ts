@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { SecurityService } from 'src/app/core/service/security.service';
 
 @Component({
   selector: 'app-header-private',
@@ -8,5 +9,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  constructor(private securityService: SecurityService,
+    private router: Router
+
+  ) { }
+  logout(): void {  
+    this.securityService.logout();
+    this.router.navigate(['/public/login']);
+  }
 
 }

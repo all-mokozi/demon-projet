@@ -15,7 +15,8 @@
       <div class="row">
         <div class="col-md-4 mb-3">
           <label class="form-label text-muted">Filtrer par statut</label>
-          <select class="form-select" [(ngModel)]="filter.statut" id="filterStatus" (change)="onFilterStatusChange()">
+          <select class="form-select" [(ngModel)]="filter.statut" id="filterStatus"
+            (change)="onFilterStatutAndSpecialityChange()">
 
             <option value="">Tous les statuts</option>
             <option value="En attente">En attente</option>
@@ -25,7 +26,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label text-muted">Filtrer par spécialité</label>
-          <select class="form-select" [(ngModel)]="filter.specialite" (change)="onFilterSpecialityChange()"
+          <select class="form-select" [(ngModel)]="filter.specialite" (change)=" onFilterStatutAndSpecialityChange()"
             id="filterSpeciality">
             <option value="">Toutes les spécialités</option>
             <option value="Cardiologie">Cardiologie</option>
@@ -56,7 +57,7 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             @for(demandes of demandesResponse.data ; track demandes.id){
             <tr>
               <td class="align-middle">{{demandes.specialite}}</td>
@@ -70,7 +71,7 @@
                   <i class="bi bi-x-circle"></i> {{demandes.statut}}
                 </span>
                 <span *ngSwitchDefault class="badge bg-warning text-dark">
-                  <i class="bi bi-clock"></i> {{demandes.statut}} 
+                  <i class="bi bi-clock"></i> {{demandes.statut}}
                 </span>
 
                 <!-- @switch(demandes.statut){
@@ -134,17 +135,17 @@
 
       <nav class="mt-4">
         <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <a class="page-link ">Précédent</a>
+          <li class="page-item" [class.disabled]="!activePrecedent()">
+            <a class="page-link" href="javascript:void(0)" (click)="onPaginate(demandesResponse.currentPage - 1)">Précédent</a>
           </li>
           @for(indexpage of demandesResponse.pages; track indexpage){
           <li class="page-item" [class.active]="indexpage === demandesResponse.currentPage">
-            <a class="page-link">{{indexpage}}</a>
+            <a class="page-link" href="javascript:void(0)" (click)="onPaginate(indexpage)">{{indexpage}}</a>
           </li>
           }
 
-          <li class="page-item">
-            <a class="page-link">Suivant</a>
+          <li class="page-item" [class.disabled]="!activeSuivant()">
+            <a class="page-link" href="javascript:void(0)" (click)="onPaginate(demandesResponse.currentPage + 1)">Suivant</a>
           </li>
         </ul>
       </nav>
