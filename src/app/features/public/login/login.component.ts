@@ -1,6 +1,6 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserLoginRequest } from 'src/app/core/models/user.model';
 import { SecurityService } from 'src/app/core/service/security.service';
@@ -17,8 +17,13 @@ export class LoginComponent {
     email:'mohamed',
     password:''
   }
+  errorMessage:string='';
   constructor(private securityService: SecurityService,private router:Router) { }
-  onLogin():void{
+  onLogin(formCtrl:NgForm):void{
+    if(formCtrl.invalid){
+      this.errorMessage='veuillez remplir tous les champs correctement.';
+      return;
+    }
   
     const loginResult = this.securityService.login(this.userLogin);
     if(loginResult!=null){
@@ -30,5 +35,8 @@ export class LoginComponent {
 
   
   }
-
+ isFieldInvalid(fieldName:string,formCtrl:NgForm):boolean{
+  const field = formCtrl.form.get(fieldName);
+  return !!(field && field.invalid && (field.dirty || field.touched));
+ }
 }
