@@ -9,8 +9,11 @@
             <i class="fas fa-user-plus me-2"></i>
             Créer un Nouveau Patient
           </h1>
+          <div class="alert alert-success" *ngIf="messageSuccess" role="alert">
+            {{ messageSuccess }}
+          </div>
 
-          <form>
+          <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <!-- Numéro Patient -->
               <div class="col-md-6 mb-3">
@@ -22,9 +25,20 @@
                   type="text"
                   class="form-control"
                   id="numeroPatient"
-                  value="PAT-001"
-                  readonly
+                  placeholder="NUAP000X"
+                  formControlName="numero"
+                  [ngClass]="{ 'is-invalid': isFieldInvalid('numero') , 'is-valid':isFieldInvalid('numero') }"
+                 
                 />
+                @if (isFieldInvalid('numero')) {
+                  @if (f['numero'].errors?.['required']) {
+                    <div class="text-danger mt-1 small">
+                      <i class="fas fa-exclamation-triangle me-1"></i>
+                      Le numéro patient est requis.
+                    </div>
+                  }
+                }
+
               </div>
 
               <!-- Nom -->
@@ -38,7 +52,17 @@
                   class="form-control"
                   id="nom"
                   placeholder="Dupont"
+                  formControlName="nom"
+                  [ngClass]="{ 'is-invalid': isFieldInvalid('nom') , 'is-valid': !isFieldInvalid('nom') }"
                 />
+                @if ( isFieldInvalid('nom') ) {
+                    @if (f['nom'].errors?.['required']) {
+                      <div class="text-danger mt-1 small">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Le nom est requis.
+                      </div>
+                    }
+                  }
               </div>
 
               <!-- Prénom -->
@@ -52,7 +76,17 @@
                   class="form-control"
                   id="prenom"
                   placeholder="Jean"
+                  formControlName="prenom"
+                  [ngClass]="{ 'is-invalid': isFieldInvalid('prenom') , 'is-valid': !isFieldInvalid('prenom') }"
                 />
+                @if (isFieldInvalid('prenom')) {
+                    @if (f['prenom'].errors?.['required']) {
+                      <div class="text-danger mt-1 small">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Le prénom est requis.
+                      </div>
+                    }
+                  }
               </div>
 
               <!-- Téléphone -->
@@ -66,7 +100,18 @@
                   class="form-control"
                   id="telephone"
                   placeholder="+221 77 123 45 67"
+                  formControlName="telephone"
+                  [ngClass]="{ 'is-invalid': isFieldInvalid('telephone') , 'is-valid': !isFieldInvalid('telephone') }"
                 />
+                @if (isFieldInvalid('telephone')) {
+                    @if (f['telephone'].errors?.['required']) {
+                      <div class="text-danger mt-1 small">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Le numéro de téléphone est requis.
+                      </div>
+                    }
+                 
+                  }
               </div>
 
               <!-- Adresse -->
@@ -80,7 +125,17 @@
                   id="adresse"
                   rows="2"
                   placeholder="Rue, Code postal, Ville"
+                  formControlName="adresse"
+                  [ngClass]="{ 'is-invalid': isFieldInvalid('adresse') , 'is-valid': !isFieldInvalid('adresse') }"
                 ></textarea>
+                @if (isFieldInvalid('adresse')) {
+                    @if (f['adresse'].errors?.['required']) {
+                      <div class="text-danger mt-1 small">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        L'adresse est requise.
+                      </div>
+                    }
+                  }
               </div>
 
               <!-- Antécédents Médicaux -->
@@ -94,17 +149,18 @@
                   id="antecedents"
                   rows="4"
                   placeholder="Décrivez vos antécédents médicaux, allergies, maladies chroniques..."
+                  formControlName="antecedents"
                 ></textarea>
               </div>
             </div>
 
             <!-- Boutons d'action -->
             <div class="d-flex gap-2 justify-content-end mt-4">
-              <button type="button" class="btn btn-secondary">
+              <button type="button" class="btn btn-secondary" (click)="onReset()">
                 <i class="fas fa-times me-1"></i>
                 Annuler
               </button>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid">
                 <i class="fas fa-check me-1"></i>
                 Créer Patient
               </button>

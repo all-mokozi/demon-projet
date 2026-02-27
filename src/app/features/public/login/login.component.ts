@@ -36,7 +36,7 @@ export class LoginComponent {
   
   }
  isFieldInvalid(fieldName:string,formCtrl:NgForm):boolean{
-  const field = formCtrl.form.get(fieldName);
+  const field = formCtrl?.controls[fieldName];
   return !!(field && field.invalid && (field.dirty || field.touched));
  }
 }
