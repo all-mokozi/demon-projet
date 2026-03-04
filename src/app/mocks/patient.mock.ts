@@ -1,5 +1,5 @@
-import { User } from "../core/models/user.model";
-import { PatientModel } from "../features/private/models/patient.models";
+import { PatientModel } from "../core/models/patient.models";
+
 
 export const MOCK_PATIENTS:PatientModel[] = [
   {

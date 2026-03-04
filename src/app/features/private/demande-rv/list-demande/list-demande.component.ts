@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DemandeListResponseModel, DemandeRVFilterModel} from '../../models/demande.models';
 import { DemandeService } from '../services/demande.service';
@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterLink,FormsModule,CommonModule],
   templateUrl: './list-demande.component.html',
-  styleUrl: './list-demande.component.css'
+  styleUrl: './list-demande.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListDemandeComponent implements OnInit,OnDestroy {
    title: string = "Liste des demandes de rendez-vous";

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import {  FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import {  PatientRequest } from '../../private/models/patient.models';
+
 import { CommonModule } from '@angular/common';
 import { PatientService } from 'src/app/core/service/patient.service';
+import { PatientRequest } from '../../../core/models/patient.models';
 
 @Component({
   selector: 'app-patient',

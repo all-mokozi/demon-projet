@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MOCK_PATIENTS } from '@mocks';
-import { PatientRequest } from 'src/app/features/private/models/patient.models';
+import { PatientRequest } from 'src/app/core/models/patient.models';
 
 @Injectable({
   providedIn: 'root'
