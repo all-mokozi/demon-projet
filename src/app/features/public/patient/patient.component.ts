@@ -24,7 +24,7 @@ export class PatientComponent {
     prenom: ['',(Validators.required)],
     
      adresse:['',(Validators.required)],
-      telephone: ['', (Validators.required)],
+      telephone: ['', (Validators.required,Validators.pattern(/^(77|78|79)[0-9]{7}$/))],
       antecedents: [''],
     
   }); 

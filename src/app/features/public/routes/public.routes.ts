@@ -15,11 +15,13 @@ export const publicRoutes: Routes = [
                     pathMatch: 'full'
                 },
                 {path: 'patient', 
-                    component: PatientComponent
+                    loadComponent: () => import('../patient/patient.component').then(m => m.PatientComponent)
+                   
                 },
                 {
                     path: 'login',
-                    component: LoginComponent
+                    loadComponent: () => import('../login/login.component').then(m => m.LoginComponent)
+                    
                 },
             ]
               

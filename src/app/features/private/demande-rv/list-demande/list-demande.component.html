@@ -57,22 +57,15 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody >
+          <tbody>
             @for(demandes of demandesResponse.data ; track demandes.id){
             <tr>
               <td class="align-middle">{{demandes.specialite}}</td>
               <td class="align-middle">{{demandes.dateDemande}}</td>
               <td class="align-middle">{{demandes.heure}}</td>
-              <td class="align-middle" [ngSwitch]="demandes.statut">
-                <span *ngSwitchCase="'Acceptée'" class="badge bg-success">
-                  <i class="bi bi-check-circle"></i> {{demandes.statut}}
-                </span>
-                <span *ngSwitchCase="'Refusée'" class="badge bg-danger">
-                  <i class="bi bi-x-circle"></i> {{demandes.statut}}
-                </span>
-                <span *ngSwitchDefault class="badge bg-warning text-dark">
-                  <i class="bi bi-clock"></i> {{demandes.statut}}
-                </span>
+              <td >
+                <app-badge [statut]="demandes.statut"></app-badge>
+                
 
                 <!-- @switch(demandes.statut){
                 @case('Acceptée'){
@@ -132,28 +125,19 @@
         </table>
       </div>
       <!-- Pagination -->
+      <app-pagination *ngIf="demandesResponse"
+        [currentPage]="demandesResponse.currentPage"
+        
+        [pages]="demandesResponse.pages"
+        (pageChange)="onPaginate($event)">
+      </app-pagination>
 
-      <nav class="mt-4">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" [class.disabled]="!activePrecedent()">
-            <a class="page-link" href="javascript:void(0)" (click)="onPaginate(demandesResponse.currentPage - 1)">Précédent</a>
-          </li>
-          @for(indexpage of demandesResponse.pages; track indexpage){
-          <li class="page-item" [class.active]="indexpage === demandesResponse.currentPage">
-            <a class="page-link" href="javascript:void(0)" (click)="onPaginate(indexpage)">{{indexpage}}</a>
-          </li>
-          }
-
-          <li class="page-item" [class.disabled]="!activeSuivant()">
-            <a class="page-link" href="javascript:void(0)" (click)="onPaginate(demandesResponse.currentPage + 1)">Suivant</a>
-          </li>
-        </ul>
-      </nav>
-
+      
       }@else{
-      <div class="text-center text-muted py-4">
-        <i class="bi bi-inbox"></i> Aucune demande de rendez-vous trouvée.
+      <div class="p-4">
+        <app-alert [message]="'Aucune demande de rendez-vous trouvée.'" [type]="'danger'"></app-alert>
       </div>
+
       }
 
 

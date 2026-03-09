@@ -9,40 +9,43 @@ import { isConnectGuard } from "src/app/core/guards/is-connect.guard";
 export const privateRoutes: Routes = [
     // private route
     {
-    path: '',
-    component: PrivateComponent,
-    canActivate: [isConnectGuard],
-    canActivateChild: [isConnectGuard],
-    children: [
-     
-         {
-
-        path: 'dashboard',
-        component: DashboardComponent
-    }
-    , {
-
-        path: 'form-demande',
-        component: FormDemandeComponent
-
-    }
-
-    , {
-        path: 'list-demande',
-        component: ListDemandeComponent
-    }
-
-    ,
-    {
-        path: 'rv',
-        component: RvComponent
-
-        
-    } ,   {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full' 
-    },
-    ]
+        component: PrivateComponent,
+        
+        canActivateChild: [isConnectGuard],
+        children: [
+
+            {
+
+                path: 'dashboard',
+                loadComponent: () => import('../dashboard/dashboard.component').then(m => m.DashboardComponent)
+                
+            }
+            , {
+
+                path: 'form-demande',
+                loadComponent: () => import('../demande-rv/form-demande/form-demande.component').then(m => m.FormDemandeComponent)
+
+            }
+
+            , {
+                path: 'list-demande',
+                loadComponent: () => import('../demande-rv/list-demande/list-demande.component').then(m => m.ListDemandeComponent)
+                
+            }
+
+            ,
+            {
+                path: 'rv',
+                loadComponent: () => import('../rv/rv.component').then(m => m.RvComponent)
+               
+
+
+            }, {
+                path: '',
+                redirectTo: 'dashboard',
+                pathMatch: 'full'
+            },
+        ]
     }
 ]

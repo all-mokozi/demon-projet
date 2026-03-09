@@ -1,16 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DemandeListResponseModel, DemandeRVFilterModel} from '../../models/demande.models';
-import { DemandeService } from '../services/demande.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DemandeMockService } from '../services/demande.mock.service';
-import { Observable, Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
+import { DEMANDE_SERVICE_TOKEN, DemandedServiceInterface } from '../services/interface/demande.interface.service';
+import { AlertComponent } from 'src/app/shared/component/alert/alert.component';
+import { BadgeComponent } from 'src/app/shared/component/badge/badge.component';
+import { PaginationComponent } from 'src/app/shared/component/pagination/pagination.component';
 
 @Component({
   selector: 'app-list-demande',
   standalone: true,
-  imports: [RouterLink,FormsModule,CommonModule],
+  imports: [RouterLink,FormsModule,CommonModule,AlertComponent,BadgeComponent,PaginationComponent],
   templateUrl: './list-demande.component.html',
   styleUrl: './list-demande.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,7 +26,7 @@ export class ListDemandeComponent implements OnInit,OnDestroy {
      statut: 'En attente'
    }
 
-   constructor(private demandeService: DemandeMockService,private cdr: ChangeDetectorRef) {
+   constructor(@Inject(DEMANDE_SERVICE_TOKEN) private demandeService: DemandedServiceInterface,private cdr: ChangeDetectorRef) {
      
    }
    private loadDemandes(): void {
@@ -49,17 +51,13 @@ export class ListDemandeComponent implements OnInit,OnDestroy {
    }
   
     onFilterStatutAndSpecialityChange(): void {
+      this.filter.page=1;
       this.loadDemandes();
     }
     onPaginate(page: number): void {
       this.filter.page = page;
       this.loadDemandes();
     }
-    activePrecedent(): boolean {
-      return (this.demandesResponse?.currentPage || 1) > 1;
-    }
-    activeSuivant(): boolean {
-      return (this.demandesResponse?.currentPage || 1) < (this.demandesResponse?.totalPages || 1);
-    }
+ 
  
 }
