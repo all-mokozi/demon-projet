@@ -1,10 +1,8 @@
 import { Routes } from "@angular/router";
 import { PrivateComponent } from "../private.component";
-import { DashboardComponent } from "../dashboard/dashboard.component";
-import { FormDemandeComponent } from "../demande-rv/form-demande/form-demande.component";
-import { ListDemandeComponent } from "../demande-rv/list-demande/list-demande.component";
-import { RvComponent } from "../rv/rv.component";
 import { isConnectGuard } from "src/app/core/guards/is-connect.guard";
+import { demandeResolver } from "../demande-rv/resolver/demande.resolver";
+import { rvResolver } from "../demande-rv/resolver/rv.resolver";
 
 export const privateRoutes: Routes = [
     // private route
@@ -24,20 +22,27 @@ export const privateRoutes: Routes = [
             , {
 
                 path: 'form-demande',
-                loadComponent: () => import('../demande-rv/form-demande/form-demande.component').then(m => m.FormDemandeComponent)
+                loadComponent: () => import('../demande-rv/form-demande/form-demande.component').then(m => m.FormDemandeComponent),
+               
 
             }
 
             , {
                 path: 'list-demande',
-                loadComponent: () => import('../demande-rv/list-demande/list-demande.component').then(m => m.ListDemandeComponent)
+                loadComponent: () => import('../demande-rv/list-demande/list-demande.component').then(m => m.ListDemandeComponent),
+                resolve: {
+                    demandes: demandeResolver
+                }
                 
             }
 
             ,
             {
-                path: 'rv',
-                loadComponent: () => import('../rv/rv.component').then(m => m.RvComponent)
+                path: 'list-rv',
+                loadComponent: () => import('../demande-rv/demande-rv.component').then(m => m.DemandeRvComponent),
+                resolve: {
+                    rv: rvResolver
+                }
                
 
 
